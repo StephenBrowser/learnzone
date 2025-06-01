@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="stylesheet" href="style.css" />
+    <script
+      src="https://kit.fontawesome.com/50e3afc7ac.js"
+      crossorigin="anonymous"
+    ></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+      integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>StreamEasy</title>
+
+    <link
+      rel="icon"
+      href="https://cdn.glitch.global/2a7fd730-62bc-453f-96c2-91756be0c721/Untitled%20design.png?v=1745537855225"
+      type="image/png"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Helvetica:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <script>
+    // Disable right-click
+    document.addEventListener("contextmenu", (e) => e.preventDefault());
+
+    // Block common devtool shortcuts
+    document.addEventListener("keydown", (e) => {
+      // F12, Ctrl+Shift+I, Ctrl+Shift+J, Ctrl+U, Ctrl+S, Ctrl+Shift+C
+      if (
+        e.key === "F12" ||
+        (e.ctrlKey && e.shiftKey && ["I", "J", "C"].includes(e.key)) ||
+        (e.ctrlKey && ["U", "S"].includes(e.key))
+      ) {
+        e.preventDefault();
+      }
+    });
+
+    // Block copy/paste
+    document.addEventListener("copy", (e) => e.preventDefault());
+    document.addEventListener("cut", (e) => e.preventDefault());
+    document.addEventListener("paste", (e) => e.preventDefault());
+
+    // Try to disrupt DevTools detection
+    setInterval(() => {
+      const before = performance.now();
+      debugger;
+      const after = performance.now();
+      if (after - before > 100) {
+        document.body.innerHTML =
+          "<h1 style='color:red;text-align:center;'>DevTools Detected — Access Denied</h1>";
+      }
+    }, 1000);
+  </script>
+
+  <body>
+    <header>
+      <h1><i class="fa-solid fa-film"></i> StreamEasy</h1>
+      <div>
+        <button class="nav-button" onclick="showHomePage()">
+          <i class="fa-solid fa-house"></i> Home
+        </button>
+        <button class="nav-button" onclick="showMoviesPage()">
+          <i class="fa-solid fa-film"></i> Movies
+        </button>
+        <button class="nav-button" onclick="showTVShowsPage()">
+          <i class="fa-solid fa-tv"> </i> TV Series
+        </button>
+        <button class="nav-button" onclick="showSportsPage()">
+          <i class="fa-solid fa-baseball-bat-ball"> </i> Sports
+        </button>
+
+        <button
+          class="nav-button"
+          onclick="window.location.href='search.html';"
+        >
+          <i class="fa-solid fa-magnifying-glass"></i> Search
+        </button>
+      </div>
+    </header>
+
+    <div class="content" id="homepage-section">
+      <div class="banner">
+        <img
+          src="https://dapsmagic.com/wp-content/uploads/2025/03/Lilo-Stitch-Featured-Image-2.jpg"
+          alt="Banner"
+          class="banner-image"
+        />
+        <div class="banner-overlay">
+          <h2 class="banner-title">Lilo and Stitch</h2>
+          <p class="banner-subtitle">
+            PG 2025 - Comedy / Sci-Fi
+            <span class="rating">7.1 <i class="fa-solid fa-star"></i></span>
+          </p>
+          <button class="blue-button" onclick="openBannerMovie()">
+            <i class="fa-solid fa-play"></i> Watch Now
+          </button>
+        </div>
+      </div>
+
+      <h2><i class="fa-solid fa-film"></i> New Releases</h2>
+
+      <div class="movie-section" id="new-releases"></div>
+      <h2><i class="fa-solid fa-tv"> </i> Top-Rated TV</h2>
+      <div class="movie-section" id="top-rated-tv-shows"></div>
+      <h2>
+        <i class="fa-solid fa-chart-column"></i>
+        Trending this Week
+      </h2>
+      <div class="movie-section" id="trending-movies"></div>
+    </div>
+
+    <div class="content" id="all-movies-section" style="display: none">
+      <h2><i class="fa-solid fa-fire"></i> Popular</h2>
+      <br />
+      <div class="movie-section" id="all-movies"></div>
+      <h2><i class="fa-solid fa-chart-column"></i> Trending this Week</h2>
+      <div class="movie-section" id="trending-movies-2"></div>
+      <h2><i class="fa-solid fa-star"></i> Top-Rated</h2>
+      <div class="movie-section" id="top-movies"></div>
+    </div>
+
+    <div class="content" id="all-tv-shows-section" style="display: none">
+      <h2><i class="fa-solid fa-fire"></i> Popular TV</h2>
+
+      <div class="movie-section" id="all-tv-shows"></div>
+      <h2><i class="fa-solid fa-chart-column"></i> Trending This Week</h2>
+      <div class="movie-section" id="trending-tv-shows"></div>
+      <h2><i class="fa-solid fa-star"></i> Top-Rated</h2>
+      <div class="movie-section" id="top-rated-tv-shows-2"></div>
+    </div>
+
+    <div id="video-overlay" class="overlay" style="display: none">
+      <div class="overlay-content">
+        <div class="overlay-header">
+          <h2 id="overlay-title"></h2>
+          <button class="close-button" onclick="closeOverlay()">&times;</button>
+        </div>
+        <div id="tv-controls" style="display: none">
+          <button
+            id="toggle-episodes"
+            class="blue-button"
+            onclick="toggleEpisodeDropdowns()"
+          >
+            <i class="fa-solid fa-bars"></i> Options
+          </button>
+          <div id="episode-selection" style="display: none">
+            <div class="episode-selector">
+              <label for="current-season">S</label>
+              <input
+                type="number"
+                id="current-season"
+                min="1"
+                onchange="updatePlayerAndTabOption()"
+              />
+            </div>
+            <div class="episode-selector">
+              <label for="current-episode">E</label>
+              <input
+                type="number"
+                id="current-episode"
+                min="1"
+                onchange="updatePlayerAndTabOption()"
+              />
+            </div>
+            <button class="blue-button" onclick="previousEpisode()">
+              <i class="fa-solid fa-backward-step"></i> Previous
+            </button>
+            <button class="blue-button" onclick="nextEpisode()">
+              <i class="fa-solid fa-forward-step"></i> Next
+            </button>
+          </div>
+        </div>
+        <iframe
+          id="video-player-iframe"
+          src="https://2embed.to"
+          frameborder="0"
+          allowfullscreen
+        ></iframe>
+
+        <div class="source-selector">
+          <div
+            style="
+              display: flex;
+              align-items: flex-start;
+              flex-wrap: wrap;
+              gap: 10px;
+              justify-content: flex-start;
+            "
+          >
+            <select
+              id="video-source-select"
+              onchange="updatePlayerAndTabOption()"
+            >
+              <option value="selectsource">Select Source</option>
+              <option value="vidsrcco">VidSrc.co (Adless)</option>
+              <option value="vidsrcsu">VidSrc.su (Adless)</option>
+              <option value="vidsrccc">VidSrc.cc</option>
+              <option value="vidsrc">VidSrc.xyz</option>
+
+              <option value="vidsrcvip">VidSrc.vip</option>
+              <option value="vidsrcrip">VidSrc.rip</option>
+
+              <option value="2embed">2Embed</option>
+              <option value="autoembed">AutoEmbed</option>
+              <option value="superembed">SuperEmbed</option>
+              <option value="embedescape">EmbedEscape (Adless)</option>
+              <option value="embedsu">Embed.su</option>
+
+              <option value="moviekex">MovieKex</option>
+              <option value="moviesclub">MoviesClub</option>
+              <option value="111movies">111Movies (Mostly Adless)</option>
+              <option value="vidfast">VidFast</option>
+              <option value="vidlink">VidLink</option>
+              <option value="vidjoy">VidJoy</option>
+              <option value="videasy">VidEasy</option>
+              <option value="vidbinge">VidBinge (Adless)</option>
+              <option value="vidora">Vidora (Adless)</option>
+            </select>
+            <button
+              id="open-player-tab"
+              class="blue-button"
+              onclick="window.location.href='https://media.tenor.com/KUdAow8LKG4AAAAe/you-have-no-aura-aura.png';"
+            >
+              <i class="fa-solid fa-rectangle-ad"> </i> Click to get aura
+            </button>
+            <button id="tmdb-button" class="blue-button">
+              <i class="fa-solid fa-file-lines"></i> Description
+            </button>
+            <button class="blue-button" onclick="openEmbedInNewTab()">
+              <i class="fa-solid fa-up-right-from-square"></i> View in Browser
+            </button>
+
+            <script
+              async
+              src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4233973495883894"
+              crossorigin="anonymous"
+            ></script>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
