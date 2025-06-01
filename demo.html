@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>The Water Cycle – LearnZone Demo</title>
+  <style>
+    body {
+      font-family: Helvetica, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f9f9f9;
+      color: #333;
+    }
+    header {
+      background: #007bff;
+      color: white;
+      padding: 1rem 2rem;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 1.8rem;
+    }
+    main {
+      padding: 2rem;
+      max-width: 800px;
+      margin: auto;
+    }
+    section {
+      margin-bottom: 2rem;
+    }
+    h2 {
+      color: #007bff;
+    }
+    .card {
+      background: white;
+      padding: 1.5rem;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+      margin-bottom: 1.5rem;
+    }
+    ul {
+      padding-left: 1.2rem;
+    }
+    label {
+      display: block;
+      margin: 0.5rem 0;
+      cursor: pointer;
+    }
+    .quiz-question {
+      margin-bottom: 1.5rem;
+    }
+    button {
+      background: #007bff;
+      color: white;
+      border: none;
+      padding: 0.6rem 1rem;
+      font-size: 1rem;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    .result {
+      font-weight: bold;
+      margin-top: 1rem;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>🌧️ The Water Cycle – Lesson & Quiz</h1>
+  </header>
+
+  <main>
+    <section class="card">
+      <h2>📘 Lesson</h2>
+      <p>The water cycle is the continuous movement of water on, above, and below the surface of the Earth. It is powered by the sun’s energy and involves several key processes:</p>
+      <ul>
+        <li><strong>Evaporation</strong> – Water changes from liquid to vapor due to heat.</li>
+        <li><strong>Condensation</strong> – Water vapor cools and turns back into liquid to form clouds.</li>
+        <li><strong>Precipitation</strong> – Water falls back to Earth as rain, snow, sleet, or hail.</li>
+        <li><strong>Collection</strong> – Water gathers in oceans, rivers, lakes, or infiltrates the ground.</li>
+      </ul>
+      <p>This cycle helps regulate Earth’s climate and supports all forms of life.</p>
+    </section>
+
+    <section class="card">
+      <h2>📝 Quiz</h2>
+      <form id="quiz-form">
+        <div class="quiz-question">
+          <p>1. What process turns liquid water into vapor?</p>
+          <label><input type="radio" name="q1" value="a"> Condensation</label>
+          <label><input type="radio" name="q1" value="b"> Precipitation</label>
+          <label><input type="radio" name="q1" value="c"> Evaporation</label>
+        </div>
+        <div class="quiz-question">
+          <p>2. Which of the following is a form of precipitation?</p>
+          <label><input type="radio" name="q2" value="a"> Wind</label>
+          <label><input type="radio" name="q2" value="b"> Snow</label>
+          <label><input type="radio" name="q2" value="c"> Sunshine</label>
+        </div>
+        <div class="quiz-question">
+          <p>3. What forms when water vapor condenses?</p>
+          <label><input type="radio" name="q3" value="a"> Clouds</label>
+          <label><input type="radio" name="q3" value="b"> Soil</label>
+          <label><input type="radio" name="q3" value="c"> Ocean</label>
+        </div>
+        <div class="quiz-question">
+          <p>4. Which part of the water cycle involves water soaking into the ground?</p>
+          <label><input type="radio" name="q4" value="a"> Precipitation</label>
+          <label><input type="radio" name="q4" value="b"> Infiltration</label>
+          <label><input type="radio" name="q4" value="c"> Condensation</label>
+        </div>
+        <button type="button" onclick="submitQuiz()">Submit Quiz</button>
+        <p class="result" id="quiz-result"></p>
+      </form>
+    </section>
+  </main>
+
+  <script>
+    function submitQuiz() {
+      const answers = {
+        q1: "c",
+        q2: "b",
+        q3: "a",
+        q4: "b"
+      };
+      let score = 0;
+      let total = 4;
+
+      for (let key in answers) {
+        const selected = document.querySelector(`input[name="${key}"]:checked`);
+        if (selected && selected.value === answers[key]) {
+          score++;
+        }
+      }
+
+      document.getElementById("quiz-result").textContent = `You scored ${score} out of ${total}!`;
+    }
+  </script>
+
+</body>
+</html>
